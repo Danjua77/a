@@ -1,1 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kucho Sequence</title>
+    <!-- Add meta viewport for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: #e8f5e9;
+            /* Elimina centrado y flex del body */
+            width: 100vw;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        body {
+            /* Elimina flex y centrado */
+            width: 100vw;
+            min-height: 100vh;
 
+            /* Haz la animación de fade-in más rápida */
+            opacity: 0;
+            transition: opacity 1.5s cubic-bezier(.77,0,.18,1);
+        }
+        body.fade-in {
+            opacity: 1;
+        }
+        .arbol-chan-container {
+            /* Haz que ocupe toda la pantalla y se fije */
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('Fondo texto.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: none;
+            border-radius: 0;
+            overflow: auto;
+            /* Elimina max/min width/height */
+        }
+        .arbol-chan-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 92vw;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 2.5vh 0 2.5vh 0;
+            /* Quitar fondo, borde y sombra */
+            background: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        /* Imagen baja desde arriba */
+        .arbol-chan-img {
+            width: 44vw;
+            max-width: 180px;
+            min-width: 90px;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transition: opacity 1.2s, transform 1.2s cubic-bezier(.77,0,.18,1);
+            transform: translateY(-120px);
+        }
+        .arbol-chan-img.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .arbol-chan-titulo {
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #178a2c;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 0.7rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            text-shadow: 0 2px 12px #fff, 0 0 12px #178a2c, 2px 2px 0 #fff;
+        }
+        .arbol-chan-texto {
+            color: #fff;
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 1.05rem;
+            margin-top: 0.3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            text-shadow: 0 2px 8px #000;
+        }
+        .btn-continuar {
+            margin-top: 0.3rem;
+            font-size: 1.1rem;
+            background: #178a2c;
+            color: #fff;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            padding: 0.6rem 2rem;
+            font-weight: bold;
+            font-family: 'Montserrat', Arial, sans-serif;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            cursor: pointer;
+            transition: background 0.2s, border 0.2s;
+        }
+        .btn-continuar:active {
+            background: #176d13;
+            border: 2px solid #ffe44d;
+        }
+        /* Pong styles (copiados tal cual del flujo original) */
+        #pong-container {
+            /* Centrado absoluto vertical y horizontal */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('fonde mesa.jpg') no-repeat center center, linear-gradient(180deg, #e8f5e9 0%, #178a2c 100%);
+            background-size: cover;
+            /* Elimina cualquier margen/padding extra */
+            margin: 0;
+            padding: 0;
+        }
+        #pong-canvas {
+            background: transparent;
+            display: block;
+            margin: 0; /* Elimina auto para evitar desplazamiento */
+            width: 92vw;
+            height: 70vh;
+            max-width: 370px;
+            max-height: 620px;
+            aspect-ratio: 9/16;
+            border-radius: 18px;
+            box-shadow: 0 0 32px 4px #178a2c88, 0 0 0 4px #178a2c;
+            touch-action: none;
+        }
+        #pong-end {
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: url('Fondo texto.jpg') no-repeat center center;
+            background-size: cover;
+            color: #178a2c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        #pong-end .arbol-img {
+            width: 38vw;
+            max-width: 180px;
+            min-width: 90px;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            filter: drop-shadow(0 4px 16px #fff);
+        }
+        #pong-end h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #178a2c;
+            text-align: center;
+            text-shadow: 0 2px 12px #fff, 0 0 12px #178a2c, 2px 2px 0 #fff;
+            margin-top: 0;
+        }
+        #pong-next-img {
+            width: 60vw;
+            max-width: 300px;
+            min-width: 120px;
+            height: 180px;
+            background: #fff;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px #178a2c33;
+        }
+        #pong-end button {
+            font-size: 1.3rem;
+            background: #178a2c;
+            color: #fff;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            padding: 0.7rem 2.5rem;
+            font-weight: bold;
+            font-family: 'Montserrat', Arial, sans-serif;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            cursor: pointer;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        #pong-end button:active {
+            background: #176d13;
+            border: 2px solid #ffe44d;
+        }
+        /* Estilos del laberinto */
+        #maze-container {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('fonde mesa.jpg') no-repeat center center, linear-gradient(180deg, #e8f5e9 0%, #178a2c 100%);
+            background-size: cover;
+            flex-direction: column;
+            /* Quita padding-top */
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #maze-canvas {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 0 32px 4px #178a2c88, 0 0 0 4px #178a2c;
+            width: 99vw;
+            height: 75vw;
+            max-width: 520px;
+            max-height: 400px;
+            min-width: 260px;
+            min-height: 180px;
+            aspect-ratio: 16/9;
+            touch-action: none;
+            display: block;
+        }
+        #maze-controls {
+            margin-top: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            width: auto;
+        }
+        #maze-controls div {
+            display: flex;
+            gap: 10px;
+        }
+        #maze-controls button {
+            width: 60px;
+            height: 60px;
+            font-size: 2em;
+            border-radius: 50%;
+            background: #178a2c;
+            color: #fff;
+            border: 2px solid #fff;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: bold;
+            box-shadow: 0 2px 8px #178a2c33;
+            cursor: pointer;
+        }
+        #maze-controls button:active {
+            background: #ffe44d;
+            color: #178a2c;
+            border: 2px solid #ffe44d;
+        }
+    </style>
+</head>
+<body>
+    <div class="arbol-chan-container" id="arbol-chan-container">
+        <div class="arbol-chan-content">
+            <img src="abuelo.sama.png" class="arbol-chan-img" id="arbol-chan-img" alt="Tree-chan" />
+            <div class="arbol-chan-titulo" id="arbol-chan-titulo">Kucho</div>
+            <div class="arbol-chan-texto" id="arbol-chan-texto">
+                HA HA HA HA HA HA HA HA HA COUGH COUGH
+            </div>
+            <button class="btn-continuar" id="btn-continuar">Continue</button>
+        </div>
+    </div>
+    <script>
+        // Don Árbol entry animation
+        const arbolChanImg = document.getElementById('arbol-chan-img');
+        setTimeout(() => {
+            arbolChanImg.classList.add('visible');
+        }, 800);
+
+        // Remove fade-ins for title, text, and button
+        /*
+        setTimeout(() => {
+            document.getElementById('arbol-chan-titulo').classList.add('visible');
+        }, 1100);
+        setTimeout(() => {
+            document.getElementById('arbol-chan-texto').classList.add('visible');
+        }, 1300);
+        setTimeout(() => {
+            document.getElementById('btn-continuar').classList.add('visible');
+        }, 1500);
+        */
+
+        // Add fade-in class on page load for slow effect
+        window.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('fade-in');
+        });
+
+        // Dialogue sequence and ping pong game
+        let arbolChanDialogStep = 0;
+        const arbolChanTexto = document.getElementById('arbol-chan-texto');
+        const btnContinuar = document.getElementById('btn-continuar');
+        btnContinuar.addEventListener('click', function() {
+            if (arbolChanDialogStep === 0) {
+                arbolChanTexto.innerHTML = `If you want the next clue you'll have to prove you're faster than me...<br>but be careful, a girl gave me a Monster, I forgot where I live...<br>and I don't care to go back.`;
+                arbolChanDialogStep = 1;
+            } else {
+                // Replace the ping pong game with the maze, but keep the win/lose screens
+                document.body.innerHTML = `
+    <style>
+        #maze-container {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('fonde mesa.jpg') no-repeat center center, linear-gradient(180deg, #e8f5e9 0%, #178a2c 100%);
+            background-size: cover;
+            flex-direction: column;
+            /* Quita padding-top */
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #maze-canvas {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 0 32px 4px #178a2c88, 0 0 0 4px #178a2c;
+            width: 99vw;
+            height: 75vw;
+            max-width: 520px;
+            max-height: 400px;
+            min-width: 260px;
+            min-height: 180px;
+            aspect-ratio: 16/9;
+            touch-action: none;
+            display: block;
+        }
+        #maze-controls {
+            margin-top: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            width: auto;
+        }
+        #maze-controls div {
+            display: flex;
+            gap: 10px;
+        }
+        #maze-controls button {
+            width: 60px;
+            height: 60px;
+            font-size: 2em;
+            border-radius: 50%;
+            background: #178a2c;
+            color: #fff;
+            border: 2px solid #fff;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: bold;
+            box-shadow: 0 2px 8px #178a2c33;
+            cursor: pointer;
+        }
+        #maze-controls button:active {
+            background: #ffe44d;
+            color: #178a2c;
+            border: 2px solid #ffe44d;
+        }
+    </style>
+    <div id="maze-container">
+        <canvas id="maze-canvas"></canvas>
+        <div id="maze-controls">
+            <div>
+                <button id="maze-up">▲</button>
+            </div>
+            <div>
+                <button id="maze-left">◀</button>
+                <button id="maze-down">▼</button>
+                <button id="maze-right">▶</button>
+            </div>
+        </div>
+    </div>
+    <div id="ost-text" style="position:fixed;bottom:18px;left:0;width:100vw;text-align:center;z-index:20;font-family:'Montserrat',Arial,sans-serif;font-size:1.05rem;color:#fff;text-shadow:0 2px 8px #000;">
+        OST: Green Hill Zone - Sonic The Hedgehog
+    </div>
+    <audio id="maze-audio" src="abuelotime.mp3" loop></audio>
+`;
+                setTimeout(() => {
+                    // --- Maze game code with win/lose screens ---
+                    const canvas = document.getElementById('maze-canvas');
+                    const ctx = canvas.getContext('2d');
+                    let W = canvas.width, H = canvas.height;
+                    function getOptimalMazeSize() {
+                        const maxCols = 60, maxRows = 40, minCell = 14;
+                        let cols = Math.floor(W / minCell);
+                        let rows = Math.floor(H / minCell);
+                        cols = Math.min(cols, maxCols);
+                        rows = Math.min(rows, maxRows);
+                        if (cols % 2 === 0) cols--;
+                        if (rows % 2 === 0) rows--;
+                        return {cols, rows};
+                    }
+                    let MAZE_COLS, MAZE_ROWS, CELL, OFFSET_X, OFFSET_Y, maze, player, ai;
+                    function recalcCellAndOffsets() {
+                        const size = getOptimalMazeSize();
+                        MAZE_COLS = size.cols;
+                        MAZE_ROWS = size.rows;
+                        CELL = Math.min(W / MAZE_COLS, H / MAZE_ROWS);
+                        OFFSET_X = (W - (CELL * MAZE_COLS)) / 2;
+                        OFFSET_Y = (H - (CELL * MAZE_ROWS)) / 2;
+                    }
+                    function generateMaze(cols, rows) {
+                        const maze = Array.from({length: rows}, () => Array(cols).fill(0));
+                        function carve(x, y) {
+                            maze[y][x] = 1;
+                            const dirs = [[1,0],[-1,0],[0,1],[0,-1]].sort(()=>Math.random()-0.5);
+                            for (const [dx,dy] of dirs) {
+                                const nx = x + dx*2, ny = y + dy*2;
+                                if (nx >= 0 && nx < cols && ny >= 0 && ny < rows && maze[ny][nx] === 0) {
+                                    maze[y+dy][x+dx] = 1;
+                                    carve(nx, ny);
+                                }
+                            }
+                        }
+                        carve(0, Math.floor(rows/2));
+                        maze[Math.floor(rows/2)][0] = 1;
+                        maze[Math.floor(rows/2)][cols-1] = 1;
+                        return maze;
+                    }
+                    function getPlayerSize() {
+                        return CELL * 0.7;
+                    }
+                    function getPlayerOffset() {
+                        return (CELL - getPlayerSize()) / 2;
+                    }
+                    function resetMazeAndPlayers() {
+                        recalcCellAndOffsets();
+                        maze = generateMaze(MAZE_COLS, MAZE_ROWS);
+                        player = {
+                            x: 0,
+                            y: Math.floor(MAZE_ROWS/2),
+                            color: '#ffe44d',
+                            path: [],
+                            step: 0,
+                        };
+                        ai = {
+                            x: 0,
+                            y: Math.floor(MAZE_ROWS/2),
+                            color: '#e53935', // rojo
+                            path: [],
+                            step: 0,
+                        };
+                        player.path = findPath(player.x, player.y, MAZE_COLS-1, player.y, maze);
+                        ai.path = findPath(ai.x, ai.y, MAZE_COLS-1, ai.y, maze, 0.2);
+                    }
+                    function resizeCanvas() {
+                        const rect = canvas.getBoundingClientRect();
+                        canvas.width = rect.width;
+                        canvas.height = rect.height;
+                        W = canvas.width; H = canvas.height;
+                        resetMazeAndPlayers();
+                    }
+                    resizeCanvas();
+                    window.addEventListener('resize', () => {
+                        resizeCanvas();
+                        draw();
+                    });
+                    function heuristic(ax, ay, bx, by) {
+                        return Math.abs(ax-bx) + Math.abs(ay-by);
+                    }
+                    function findPath(sx, sy, ex, ey, maze, randomness=0) {
+                        const cols = maze[0].length, rows = maze.length;
+                        const open = [[sx, sy, 0, heuristic(sx,sy,ex,ey), null]];
+                        const visited = Array.from({length: rows}, () => Array(cols).fill(false));
+                        while (open.length) {
+                            open.sort((a,b)=>a[2]+a[3]-b[2]-b[3]);
+                            const [x, y, g, h, prev] = open.shift();
+                            if (x === ex && y === ey) {
+                                const path = [[x,y]];
+                                let p = prev;
+                                while (p) { path.push([p[0],p[1]]); p = p[4]; }
+                                return path.reverse();
+                            }
+                            if (visited[y][x]) continue;
+                            visited[y][x] = true;
+                            for (const [dx,dy] of [[1,0],[0,1],[0,-1],[-1,0]]) {
+                                const nx = x+dx, ny = y+dy;
+                                if (nx>=0 && nx<cols && ny>=0 && ny<rows && maze[ny][nx]===1 && !visited[ny][nx]) {
+                                    open.push([nx,ny,g+1,heuristic(nx,ny,ex,ey), [x,y,g,h,prev]]);
+                                }
+                            }
+                        }
+                        return null;
+                    }
+                    function draw() {
+                        ctx.clearRect(0,0,W,H);
+                        ctx.fillStyle = "#fff";
+                        ctx.fillRect(0, 0, W, H);
+                        for (let y=0; y<MAZE_ROWS; y++) {
+                            for (let x=0; x<MAZE_COLS; x++) {
+                                if (maze[y][x] === 0) {
+                                    ctx.fillStyle = '#178a2c';
+                                    ctx.fillRect(
+                                        Math.round(OFFSET_X + x*CELL),
+                                        Math.round(OFFSET_Y + y*CELL),
+                                        Math.ceil(CELL),
+                                        Math.ceil(CELL)
+                                    );
+                                }
+                            }
+                        }
+                        // META: círculo azul MUY llamativo con nueva animación (pulsante y giro de halo)
+                        const goalX = MAZE_COLS - 1, goalY = Math.floor(MAZE_ROWS / 2);
+                        const cx = OFFSET_X + goalX * CELL + CELL / 2;
+                        const cy = OFFSET_Y + goalY * CELL + CELL / 2;
+                        const goalRadius = CELL * 0.38;
+                        const t = Date.now();
+                        const glow = 0.5 + 0.5 * Math.sin(t / 220);
+
+                        // Halo exterior giratorio y pulsante
+                        ctx.save();
+                        ctx.globalAlpha = 0.38 + 0.22 * glow;
+                        ctx.translate(cx, cy);
+                        ctx.rotate((t / 900) % (2 * Math.PI));
+                        ctx.shadowColor = "#00e0ff";
+                        ctx.shadowBlur = 48 + 24 * glow;
+                        ctx.beginPath();
+                        ctx.ellipse(0, 0, goalRadius * (1.8 + 0.12 * Math.sin(t / 180)), goalRadius * (1.2 + 0.08 * Math.cos(t / 140)), 0, 0, 2 * Math.PI);
+                        ctx.closePath();
+                        ctx.fillStyle = "#00e0ff";
+                        ctx.fill();
+                        ctx.restore();
+
+                        // Círculo exterior azul claro con sombra y pulso
+                        ctx.save();
+                        ctx.globalAlpha = 0.92;
+                        ctx.shadowColor = "#00e0ff";
+                        ctx.shadowBlur = 28 + 18 * glow;
+                        ctx.beginPath();
+                        ctx.arc(cx, cy, goalRadius * (1.08 + 0.06 * Math.sin(t / 180)), 0, 2 * Math.PI);
+                        ctx.closePath();
+                        ctx.fillStyle = "#b3e5fc";
+                        ctx.fill();
+                        ctx.restore();
+
+                        // Círculo interior azul intenso con degradado y pulso
+                        ctx.save();
+                        ctx.globalAlpha = 1;
+                        ctx.beginPath();
+                        ctx.arc(cx, cy, goalRadius * (1 + 0.04 * Math.cos(t / 150)), 0, 2 * Math.PI);
+                        ctx.closePath();
+                        const grad = ctx.createRadialGradient(cx, cy, goalRadius * 0.2, cx, cy, goalRadius);
+                        grad.addColorStop(0, "#e3f2fd");
+                        grad.addColorStop(0.5, "#2196f3");
+                        grad.addColorStop(1, "#1565c0");
+                        ctx.fillStyle = grad;
+                        ctx.fill();
+                        ctx.restore();
+
+                        // Efecto de destello animado (más suave)
+                        ctx.save();
+                        ctx.globalAlpha = 0.22 + 0.22 * glow;
+                        ctx.beginPath();
+                        ctx.arc(cx, cy, goalRadius * (1.18 + 0.06 * Math.sin(t / 120)), 0, 2 * Math.PI);
+                        ctx.closePath();
+                        ctx.fillStyle = "#fff";
+                        ctx.fill();
+                        ctx.restore();
+
+                        // Efecto de brillo tipo "estrella" girando
+                        ctx.save();
+                        ctx.globalAlpha = 0.5 + 0.3 * glow;
+                        ctx.strokeStyle = "#fff";
+                        ctx.lineWidth = 2.2;
+                        ctx.translate(cx, cy);
+                        ctx.rotate((t / 1400) % (2 * Math.PI));
+                        for (let i = 0; i < 8; i++) {
+                            ctx.save();
+                            ctx.rotate((Math.PI / 4) * i);
+                            ctx.beginPath();
+                            ctx.moveTo(goalRadius * 0.3, 0);
+                            ctx.lineTo(goalRadius * (1.05 + 0.08 * Math.sin(t / 300 + i)), 0);
+                            ctx.stroke();
+                            ctx.restore();
+                        }
+                        ctx.restore();
+
+    ctx.fillStyle = ai.color;
+    ctx.fillRect(
+        OFFSET_X + ai.x*CELL + getPlayerOffset(),
+        OFFSET_Y + ai.y*CELL + getPlayerOffset(),
+        getPlayerSize(), getPlayerSize()
+    );
+    ctx.fillStyle = player.color;
+    ctx.fillRect(
+        OFFSET_X + player.x*CELL + getPlayerOffset(),
+        OFFSET_Y + player.y*CELL + getPlayerOffset(),
+        getPlayerSize(), getPlayerSize()
+    );
+}
+                    function aiAdvance() {
+                        if (ai.step < ai.path.length-1) {
+                            ai.step++;
+                            ai.x = ai.path[ai.step][0];
+                            ai.y = ai.path[ai.step][1];
+                        }
+                    }
+                    let finished = false;
+                    function showEndScreen(playerWon) {
+                        finished = true;
+                        const mazeContainer = document.getElementById('maze-container');
+                        let html = '';
+                        if (playerWon) {
+                            html = `
+        <div class="arbol-chan-container" id="maze-end" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10;background:url('Fondo texto.jpg') no-repeat center center;background-size:cover;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+            <div class="arbol-chan-content" style="background:none;box-shadow:none;">
+                <img src="abuelo.sama.png" class="arbol-chan-img" alt="Don Árbol" style="opacity:1;transform:none;margin-bottom:0.7rem;" />
+                <div class="arbol-chan-titulo" style="color:#178a2c;margin-bottom:0.7rem;">Kucho</div>
+                <div class="arbol-chan-texto" style="color:#fff;">
+                    Who are you? Where am I?
+                </div>
+                <button id="maze-show-clue" class="btn-continuar" style="margin-top:1.2rem;">See clue</button>
+            </div>
+        </div>
+                            `;
+                            mazeContainer.insertAdjacentHTML('beforeend', html);
+                            document.getElementById('maze-show-clue').onclick = function() {
+    // Use the same space for image as the example (pong-next-img)
+    document.getElementById('maze-end').innerHTML = `
+        <div class="arbol-chan-titulo" style="color:#178a2c;margin-bottom:0.7rem;font-size:2.2rem;text-shadow:0 2px 12px #fff,0 0 12px #178a2c,2px 2px 0 #fff;">
+            Next clue
+        </div>
+        <div id="maze-next-img" style="width:60vw;max-width:300px;min-width:120px;height:180px;background:#fff;margin:0;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px #178a2c33;">
+            <img src="iguana.jpeg" alt="Clue" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:12px 12px 12px 12px;">
+        </div>
+        <button id="maze-continue" style="font-size:1.3rem;background:#178a2c;color:#fff;border:2px solid #fff;border-radius:8px;padding:0.7rem 2.5rem;font-weight:bold;font-family:'Montserrat',Arial,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;margin-top:1.5rem;margin-bottom:2rem;">Continue</button>
+    `;
+    document.getElementById('maze-continue').onclick = function() {
+        window.location.href = "https://danjua77.github.io/Sagrado.Puzzle/";
+    };
+};
+                        } else {
+                            html = `
+                                <div id="pong-end">
+                                    <img src="abuelo.sama.png" class="arbol-img" alt="Don Árbol" />
+                                    <h2>Too slow....</h2>
+                                    <button id="pong-retry">Continue</button>
+                                </div>
+                            `;
+                            mazeContainer.insertAdjacentHTML('beforeend', html);
+                            document.getElementById('pong-retry').onclick = function() {
+                                location.reload();
+                            };
+                        }
+                    }
+                    function checkWin() {
+                        if (finished) return;
+                        if (player.x === MAZE_COLS-1 && player.y === player.path[0][1]) {
+                            showEndScreen(true);
+                        } else if (ai.x === MAZE_COLS-1 && ai.y === ai.path[0][1]) {
+                            showEndScreen(false);
+                        }
+                    }
+                    function movePlayer(dx, dy) {
+                        if (finished) return;
+                        const nx = player.x + dx;
+                        const ny = player.y + dy;
+                        if (
+                            nx >= 0 && nx < MAZE_COLS &&
+                            ny >= 0 && ny < MAZE_ROWS &&
+                            maze[ny][nx] === 1
+                        ) {
+                            player.x = nx;
+                            player.y = ny;
+                            checkWin();
+                        }
+                    }
+                    // Movimiento SOLO por pulsación (no continuo) para los controles del laberinto
+                    function addSinglePressButton(id, dx, dy) {
+                        const btn = document.getElementById(id);
+                        btn.addEventListener('mousedown', () => {
+                            if (finished) return;
+                            movePlayer(dx, dy);
+                        });
+                        btn.addEventListener('touchstart', (e) => {
+                            if (finished) return;
+                            movePlayer(dx, dy);
+                            e.preventDefault();
+                        }, {passive: false});
+                    }
+                    addSinglePressButton('maze-up', 0, -1);
+                    addSinglePressButton('maze-down', 0, 1);
+                    addSinglePressButton('maze-left', -1, 0);
+                    addSinglePressButton('maze-right', 1, 0);
+
+                    document.addEventListener('keydown', function(e) {
+                        if (e.key === 'ArrowUp') movePlayer(0, -1);
+                        if (e.key === 'ArrowDown') movePlayer(0, 1);
+                        if (e.key === 'ArrowLeft') movePlayer(-1, 0);
+                        if (e.key === 'ArrowRight') movePlayer(1, 0);
+                    });
+
+                    // IA más rápida pero aún competitiva
+                    let aiTick = 0;
+                    setInterval(() => {
+                        if (!finished) {
+                            aiTick++;
+                            // La IA avanza cada tick (~cada 175ms)
+                            aiAdvance();
+                            checkWin();
+                        }
+                    }, 190); // antes 115, ahora 90ms para más velocidad
+
+                    requestAnimationFrame(function loop() {
+                        if (!finished) draw();
+                        requestAnimationFrame(loop);
+                    });
+
+                    // Música
+                    const audio = document.getElementById('maze-audio');
+                    if (audio) {
+                        audio.currentTime = 0;
+                        audio.play().catch(()=>{});
+                        audio.addEventListener('ended', function() {
+                            audio.currentTime = 0;
+                            audio.play().catch(()=>{});
+                        });
+                    }
+                }, 10);
+            }
+        });
+    </script>
+</body>
+</html>
