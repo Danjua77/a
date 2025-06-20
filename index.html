@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Kucho Sequence</title>
@@ -310,83 +310,83 @@
             } else {
                 // Reemplaza el juego de pingpong por el laberinto, pero mantén las pantallas de ganar/perder
                 document.body.innerHTML = `
-    <style>
-        #maze-container {
-            width: 100vw;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: url('fonde mesa.jpg') no-repeat center center, linear-gradient(180deg, #e8f5e9 0%, #178a2c 100%);
-            background-size: cover;
-            flex-direction: column;
-            /* Quita padding-top */
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        #maze-canvas {
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 0 32px 4px #178a2c88, 0 0 0 4px #178a2c;
-            width: 99vw;
-            height: 75vw;
-            max-width: 520px;
-            max-height: 400px;
-            min-width: 260px;
-            min-height: 180px;
-            aspect-ratio: 16/9;
-            touch-action: none;
-            display: block;
-        }
-        #maze-controls {
-            margin-top: 18px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 2;
-            width: auto;
-        }
-        #maze-controls div {
-            display: flex;
-            gap: 10px;
-        }
-        #maze-controls button {
-            width: 60px;
-            height: 60px;
-            font-size: 2em;
-            border-radius: 50%;
-            background: #178a2c;
-            color: #fff;
-            border: 2px solid #fff;
-            font-family: 'Montserrat', Arial, sans-serif;
-            font-weight: bold;
-            box-shadow: 0 2px 8px #178a2c33;
-            cursor: pointer;
-        }
-        #maze-controls button:active {
-            background: #ffe44d;
-            color: #178a2c;
-            border: 2px solid #ffe44d;
-        }
-    </style>
-    <div id="maze-container">
-        <canvas id="maze-canvas"></canvas>
-        <div id="maze-controls">
-            <div>
-                <button id="maze-up">▲</button>
-            </div>
-            <div>
-                <button id="maze-left">◀</button>
-                <button id="maze-down">▼</button>
-                <button id="maze-right">▶</button>
-            </div>
+<style>
+    #maze-container {
+        width: 100vw;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: url('fonde mesa.jpg') no-repeat center center, linear-gradient(180deg, #e8f5e9 0%, #178a2c 100%);
+        background-size: cover;
+        flex-direction: column;
+        /* Quita padding-top */
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    #maze-canvas {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 0 32px 4px #178a2c88, 0 0 0 4px #178a2c;
+        width: 99vw;
+        height: 75vw;
+        max-width: 520px;
+        max-height: 400px;
+        min-width: 260px;
+        min-height: 180px;
+        aspect-ratio: 16/9;
+        touch-action: none;
+        display: block;
+    }
+    #maze-controls {
+        margin-top: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 2;
+        width: auto;
+    }
+    #maze-controls div {
+        display: flex;
+        gap: 10px;
+    }
+    #maze-controls button {
+        width: 60px;
+        height: 60px;
+        font-size: 2em;
+        border-radius: 50%;
+        background: #178a2c;
+        color: #fff;
+        border: 2px solid #fff;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: bold;
+        box-shadow: 0 2px 8px #178a2c33;
+        cursor: pointer;
+    }
+    #maze-controls button:active {
+        background: #ffe44d;
+        color: #178a2c;
+        border: 2px solid #ffe44d;
+    }
+</style>
+<div id="maze-container">
+    <canvas id="maze-canvas"></canvas>
+    <div id="maze-controls">
+        <div>
+            <button id="maze-up">▲</button>
+        </div>
+        <div>
+            <button id="maze-left">◀</button>
+            <button id="maze-down">▼</button>
+            <button id="maze-right">▶</button>
         </div>
     </div>
-    <div id="ost-text" style="position:fixed;bottom:18px;left:0;width:100vw;text-align:center;z-index:20;font-family:'Montserrat',Arial,sans-serif;font-size:1.05rem;color:#fff;text-shadow:0 2px 8px #000;">
-        OST: Green Hill Zone - Sonic The Hedgehog
-    </div>
-    <audio id="maze-audio" src="abuelotime.mp3" loop></audio>
+</div>
+<div id="ost-text" style="position:fixed;bottom:18px;left:0;width:100vw;text-align:center;z-index:20;font-family:'Montserrat',Arial,sans-serif;font-size:1.05rem;color:#fff;text-shadow:0 2px 8px #000;">
+    OST: Green Hill Zone - Sonic The Hedgehog
+</div>
+<audio id="maze-audio" src="abuelotime.mp3" loop></audio>
 `;
                 setTimeout(() => {
                     // --- Código del juego de laberinto con pantallas de ganar/perder ---
@@ -636,31 +636,31 @@
         document.getElementById('maze-show-clue').onclick = function() {
     // Usa el mismo espacio para imagen que el ejemplo (pong-next-img)
     document.getElementById('maze-end').innerHTML = `
-    <div class="arbol-chan-titulo" style="color:#178a2c;margin-bottom:0.7rem;font-size:2.2rem;text-shadow:0 2px 12px #fff,0 0 12px #178a2c,2px 2px 0 #fff;">
-        Next clue
-    </div>
-    <div id="maze-next-img" style="width:60vw;max-width:300px;min-width:120px;height:180px;background:#fff;margin:0;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px #178a2c33;">
-        <img src="iguana.jpeg" alt="Clue" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:12px 12px 12px 12px;">
-    </div>
-    <button id="maze-continue" style="font-size:1.3rem;background:#178a2c;color:#fff;border:2px solid #fff;border-radius:8px;padding:0.7rem 2.5rem;font-weight:bold;font-family:'Montserrat',Arial,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;margin-top:1.5rem;margin-bottom:2rem;">Continue</button>
-`;
-document.getElementById('maze-continue').onclick = function() {
-    window.location.href = "https://danjua77.github.io/Sagrado.Puzzle/";
-};
-};
-                } else {
-                    html = `
-        <div id="pong-end">
-            <img src="abuelo.sama.png" class="arbol-img" alt="Don Árbol" />
-            <h2>Too slow....</h2>
-            <button id="pong-retry">Continue</button>
+        <div class="arbol-chan-titulo" style="color:#178a2c;margin-bottom:0.7rem;font-size:2.2rem;text-shadow:0 2px 12px #fff,0 0 12px #178a2c,2px 2px 0 #fff;">
+            Next clue
         </div>
+        <div id="maze-next-img" style="width:60vw;max-width:300px;min-width:120px;height:180px;background:#fff;margin:0;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px #178a2c33;">
+            <img src="iguana.jpeg" alt="Clue" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:12px 12px 12px 12px;">
+        </div>
+        <button id="maze-continue" style="font-size:1.3rem;background:#178a2c;color:#fff;border:2px solid #fff;border-radius:8px;padding:0.7rem 2.5rem;font-weight:bold;font-family:'Montserrat',Arial,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;margin-top:1.5rem;margin-bottom:2rem;">Continue</button>
     `;
-mazeContainer.insertAdjacentHTML('beforeend', html);
-document.getElementById('pong-retry').onclick = function() {
-    location.reload();
+    document.getElementById('maze-continue').onclick = function() {
+        window.location.href = "https://danjua77.github.io/Sagrado.Puzzle/";
+    };
 };
-}
+                        } else {
+                            html = `
+            <div id="pong-end">
+                <img src="abuelo.sama.png" class="arbol-img" alt="Don Árbol" />
+                <h2>Too slow....</h2>
+                <button id="pong-retry">Continue</button>
+            </div>
+        `;
+        mazeContainer.insertAdjacentHTML('beforeend', html);
+        document.getElementById('pong-retry').onclick = function() {
+            location.reload();
+        };
+    }
 }
                     function checkWin() {
                         if (finished) return;
@@ -740,4 +740,5 @@ document.getElementById('pong-retry').onclick = function() {
         });
     </script>
 </body>
+</html>
 </html>
