@@ -269,19 +269,19 @@
             <img src="abuelo.sama.png" class="arbol-chan-img" id="arbol-chan-img" alt="Tree-chan" />
             <div class="arbol-chan-titulo" id="arbol-chan-titulo">Kucho</div>
             <div class="arbol-chan-texto" id="arbol-chan-texto">
-                "Bro" here, "Bro" there... How ridiculous it sounds.<br>It's useless to lift big weights or have huge arms if your legs don't know what it means to run.
+                "Bro" here, "Bro" there... How ridiculous it sounds.<br>It's no use lifting big weights or having huge arms if your legs don't know what it means to run.
             </div>
             <button class="btn-continuar" id="btn-continuar">Continue</button>
         </div>
     </div>
     <script>
-        // Animación de entrada de Don Árbol
+        // Don Árbol entrance animation
         const arbolChanImg = document.getElementById('arbol-chan-img');
         setTimeout(() => {
             arbolChanImg.classList.add('visible');
         }, 800);
 
-        // Elimina los fade-in para título, texto y botón
+        // Remove fade-in for title, text, and button
         /*
         setTimeout(() => {
             document.getElementById('arbol-chan-titulo').classList.add('visible');
@@ -294,12 +294,12 @@
         }, 1500);
         */
 
-        // Agrega la clase fade-in al cargar la página para el efecto lento
+        // Add fade-in class on page load for slow effect
         window.addEventListener('DOMContentLoaded', function() {
             document.body.classList.add('fade-in');
         });
 
-        // Secuencia de diálogo y juego de ping pong
+        // Dialogue sequence and ping pong game
         let arbolChanDialogStep = 0;
         const arbolChanTexto = document.getElementById('arbol-chan-texto');
         const btnContinuar = document.getElementById('btn-continuar');
@@ -308,88 +308,88 @@
                 arbolChanTexto.innerHTML = `Son, I'll be quick. If you want the next clue, you'll have to be faster than me.`;
                 arbolChanDialogStep = 1;
             } else {
-                // Reemplaza el juego de pingpong por el laberinto, pero mantén las pantallas de ganar/perder
+                // Replace the ping pong game with the maze, but keep the win/lose screens
                 document.body.innerHTML = `
-<style>
-    #maze-container {
-        width: 100vw;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: url('fonde mesa.jpg') no-repeat center center, linear-gradient(180deg, #e8f5e9 0%, #178a2c 100%);
-        background-size: cover;
-        flex-direction: column;
-        /* Quita padding-top */
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    }
-    #maze-canvas {
-        background: #fff;
-        border-radius: 18px;
-        box-shadow: 0 0 32px 4px #178a2c88, 0 0 0 4px #178a2c;
-        width: 99vw;
-        height: 75vw;
-        max-width: 520px;
-        max-height: 400px;
-        min-width: 260px;
-        min-height: 180px;
-        aspect-ratio: 16/9;
-        touch-action: none;
-        display: block;
-    }
-    #maze-controls {
-        margin-top: 18px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        z-index: 2;
-        width: auto;
-    }
-    #maze-controls div {
-        display: flex;
-        gap: 10px;
-    }
-    #maze-controls button {
-        width: 60px;
-        height: 60px;
-        font-size: 2em;
-        border-radius: 50%;
-        background: #178a2c;
-        color: #fff;
-        border: 2px solid #fff;
-        font-family: 'Montserrat', Arial, sans-serif;
-        font-weight: bold;
-        box-shadow: 0 2px 8px #178a2c33;
-        cursor: pointer;
-    }
-    #maze-controls button:active {
-        background: #ffe44d;
-        color: #178a2c;
-        border: 2px solid #ffe44d;
-    }
-</style>
-<div id="maze-container">
-    <canvas id="maze-canvas"></canvas>
-    <div id="maze-controls">
-        <div>
-            <button id="maze-up">▲</button>
-        </div>
-        <div>
-            <button id="maze-left">◀</button>
-            <button id="maze-down">▼</button>
-            <button id="maze-right">▶</button>
+    <style>
+        #maze-container {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('fonde mesa.jpg') no-repeat center center, linear-gradient(180deg, #e8f5e9 0%, #178a2c 100%);
+            background-size: cover;
+            flex-direction: column;
+            /* Remove padding-top */
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #maze-canvas {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 0 32px 4px #178a2c88, 0 0 0 4px #178a2c;
+            width: 99vw;
+            height: 75vw;
+            max-width: 520px;
+            max-height: 400px;
+            min-width: 260px;
+            min-height: 180px;
+            aspect-ratio: 16/9;
+            touch-action: none;
+            display: block;
+        }
+        #maze-controls {
+            margin-top: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            width: auto;
+        }
+        #maze-controls div {
+            display: flex;
+            gap: 10px;
+        }
+        #maze-controls button {
+            width: 60px;
+            height: 60px;
+            font-size: 2em;
+            border-radius: 50%;
+            background: #178a2c;
+            color: #fff;
+            border: 2px solid #fff;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: bold;
+            box-shadow: 0 2px 8px #178a2c33;
+            cursor: pointer;
+        }
+        #maze-controls button:active {
+            background: #ffe44d;
+            color: #178a2c;
+            border: 2px solid #ffe44d;
+        }
+    </style>
+    <div id="maze-container">
+        <canvas id="maze-canvas"></canvas>
+        <div id="maze-controls">
+            <div>
+                <button id="maze-up">▲</button>
+            </div>
+            <div>
+                <button id="maze-left">◀</button>
+                <button id="maze-down">▼</button>
+                <button id="maze-right">▶</button>
+            </div>
         </div>
     </div>
-</div>
-<div id="ost-text" style="position:fixed;bottom:18px;left:0;width:100vw;text-align:center;z-index:20;font-family:'Montserrat',Arial,sans-serif;font-size:1.05rem;color:#fff;text-shadow:0 2px 8px #000;">
-    OST: Green Hill Zone - Sonic The Hedgehog
-</div>
-<audio id="maze-audio" src="abuelotime.mp3" loop></audio>
+    <div id="ost-text" style="position:fixed;bottom:18px;left:0;width:100vw;text-align:center;z-index:20;font-family:'Montserrat',Arial,sans-serif;font-size:1.05rem;color:#fff;text-shadow:0 2px 8px #000;">
+        OST: Green Hill Zone - Sonic The Hedgehog
+    </div>
+    <audio id="maze-audio" src="abuelotime.mp3" loop></audio>
 `;
                 setTimeout(() => {
-                    // --- Código del juego de laberinto con pantallas de ganar/perder ---
+                    // --- Maze game code with win/lose screens ---
                     const canvas = document.getElementById('maze-canvas');
                     const ctx = canvas.getContext('2d');
                     let W = canvas.width, H = canvas.height;
@@ -611,7 +611,7 @@
                     let finished = false;
                     function showEndScreen(playerWon) {
                         finished = true;
-                        // Detener la música al finalizar
+                        // Stop music on finish
                         const mazeAudio = document.getElementById('maze-audio');
                         if (mazeAudio) {
                             mazeAudio.pause();
@@ -621,46 +621,46 @@
                         let html = '';
                         if (playerWon) {
                             html = `
-    <div class="arbol-chan-container" id="maze-end" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10;background:url('Fondo texto.jpg') no-repeat center center;background-size:cover;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-        <div class="arbol-chan-content" style="background:none;box-shadow:none;">
-            <img src="abuelo.sama.png" class="arbol-chan-img" alt="Don Árbol" style="opacity:1;transform:none;margin-bottom:0.7rem;" />
-            <div class="arbol-chan-titulo" style="color:#178a2c;margin-bottom:0.7rem;">Kucho</div>
-            <div class="arbol-chan-texto" style="color:#fff;">
-                Not bad, son.
+        <div class="arbol-chan-container" id="maze-end" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10;background:url('Fondo texto.jpg') no-repeat center center;background-size:cover;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+            <div class="arbol-chan-content" style="background:none;box-shadow:none;">
+                <img src="abuelo.sama.png" class="arbol-chan-img" alt="Don Árbol" style="opacity:1;transform:none;margin-bottom:0.7rem;" />
+                <div class="arbol-chan-titulo" style="color:#178a2c;margin-bottom:0.7rem;">Kucho</div>
+                <div class="arbol-chan-texto" style="color:#fff;">
+                    Not bad, son.
+                </div>
+                <button id="maze-show-clue" class="btn-continuar" style="margin-top:1.2rem;">See clue</button>
             </div>
-            <button id="maze-show-clue" class="btn-continuar" style="margin-top:1.2rem;">See clue</button>
         </div>
-    </div>
-                    `;
-    mazeContainer.insertAdjacentHTML('beforeend', html);
-    document.getElementById('maze-show-clue').onclick = function() {
-    // Usa el mismo espacio para imagen que el ejemplo (pong-next-img)
+                            `;
+        mazeContainer.insertAdjacentHTML('beforeend', html);
+        document.getElementById('maze-show-clue').onclick = function() {
+    // Use the same space for image as the example (pong-next-img)
     document.getElementById('maze-end').innerHTML = `
-    <div class="arbol-chan-titulo" style="color:#178a2c;margin-bottom:0.7rem;font-size:2.2rem;text-shadow:0 2px 12px #fff,0 0 12px #178a2c,2px 2px 0 #fff;">
-        Next clue
-    </div>
-    <div id="maze-next-img" style="width:60vw;max-width:300px;min-width:120px;height:180px;background:#fff;margin:0;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px #178a2c33;">
-        <img src="iguana.jpeg" alt="Clue" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:12px 12px 12px 12px;">
-    </div>
-    <button id="maze-continue" style="font-size:1.3rem;background:#178a2c;color:#fff;border:2px solid #fff;border-radius:8px;padding:0.7rem 2.5rem;font-weight:bold;font-family:'Montserrat',Arial,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;margin-top:1.5rem;margin-bottom:2rem;">Continue</button>
-`;
-document.getElementById('maze-continue').onclick = function() {
-    window.location.href = "https://danjua77.github.io/Sagrado.Puzzle/";
-};
-};
-                } else {
-                    html = `
-        <div id="pong-end">
-            <img src="abuelo.sama.png" class="arbol-img" alt="Don Árbol" />
-            <h2>Too slow....</h2>
-            <button id="pong-retry">Continue</button>
+        <div class="arbol-chan-titulo" style="color:#178a2c;margin-bottom:0.7rem;font-size:2.2rem;text-shadow:0 2px 12px #fff,0 0 12px #178a2c,2px 2px 0 #fff;">
+            Next clue
         </div>
+        <div id="maze-next-img" style="width:60vw;max-width:300px;min-width:120px;height:180px;background:#fff;margin:0;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px #178a2c33;">
+            <img src="iguana.jpeg" alt="Clue" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:12px 12px 12px 12px;">
+        </div>
+        <button id="maze-continue" style="font-size:1.3rem;background:#178a2c;color:#fff;border:2px solid #fff;border-radius:8px;padding:0.7rem 2.5rem;font-weight:bold;font-family:'Montserrat',Arial,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;margin-top:1.5rem;margin-bottom:2rem;">Continue</button>
     `;
-mazeContainer.insertAdjacentHTML('beforeend', html);
-document.getElementById('pong-retry').onclick = function() {
-    location.reload();
+    document.getElementById('maze-continue').onclick = function() {
+        window.location.href = "https://danjua77.github.io/Sagrado.Puzzle/";
+    };
 };
-}
+                        } else {
+                            html = `
+            <div id="pong-end">
+                <img src="abuelo.sama.png" class="arbol-img" alt="Don Árbol" />
+                <h2>Too slow....</h2>
+                <button id="pong-retry">Continue</button>
+            </div>
+        `;
+        mazeContainer.insertAdjacentHTML('beforeend', html);
+        document.getElementById('pong-retry').onclick = function() {
+            location.reload();
+        };
+    }
 }
                     function checkWin() {
                         if (finished) return;
@@ -718,7 +718,7 @@ document.getElementById('pong-retry').onclick = function() {
                             aiAdvance();
                             checkWin();
                         }
-                    }, 190); // antes 115, ahora 90ms para más velocidad
+                    }, 215); // antes 115, luego 190ms, ahora 209ms para más lentitud
 
                     requestAnimationFrame(function loop() {
                         if (!finished) draw();
