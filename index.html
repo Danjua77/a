@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kucho Sequence</title>
-    <!-- Agrega meta viewport para móviles -->
+    <title>Gym Bro</title>
+    <!-- Add meta viewport for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -12,17 +12,17 @@
             margin: 0;
             padding: 0;
             background: #e8f5e9;
-            /* Elimina centrado y flex del body */
+            /* Remove centering and flex from body */
             width: 100vw;
             min-height: 100vh;
             box-sizing: border-box;
         }
         body {
-            /* Elimina flex y centrado */
+            /* Remove flex and centering */
             width: 100vw;
             min-height: 100vh;
 
-            /* Haz la animación de fade-in más rápida */
+            /* Make fade-in animation faster */
             opacity: 0;
             transition: opacity 1.5s cubic-bezier(.77,0,.18,1);
         }
@@ -30,7 +30,7 @@
             opacity: 1;
         }
         .arbol-chan-container {
-            /* Haz que ocupe toda la pantalla y se fije */
+            /* Make it take the whole screen and fixed */
             position: fixed;
             top: 0; left: 0;
             width: 100vw;
@@ -44,7 +44,7 @@
             box-shadow: none;
             border-radius: 0;
             overflow: auto;
-            /* Elimina max/min width/height */
+            /* Remove max/min width/height */
         }
         .arbol-chan-content {
             display: flex;
@@ -55,12 +55,12 @@
             max-width: 400px;
             margin: 0 auto;
             padding: 2.5vh 0 2.5vh 0;
-            /* Quitar fondo, borde y sombra */
+            /* Remove background, border and shadow */
             background: none;
             border-radius: 0;
             box-shadow: none;
         }
-        /* Imagen baja desde arriba */
+        /* Image drops from above */
         .arbol-chan-img {
             width: 44vw;
             max-width: 180px;
@@ -112,26 +112,17 @@
             background: #176d13;
             border: 2px solid #ffe44d;
         }
-        /* Pong styles (copiados tal cual del flujo original) */
+        /* Pong styles (copied as in the original flow) */
         #pong-container {
-            /* Centrado absoluto vertical y horizontal */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center;
             background: url('fonde mesa.jpg') no-repeat center center, linear-gradient(180deg, #e8f5e9 0%, #178a2c 100%);
             background-size: cover;
-            /* Elimina cualquier margen/padding extra */
-            margin: 0;
-            padding: 0;
+            position: fixed; top: 0; left: 0;
         }
         #pong-canvas {
             background: transparent;
             display: block;
-            margin: 0; /* Elimina auto para evitar desplazamiento */
+            margin: auto;
             width: 92vw;
             height: 70vh;
             max-width: 370px;
@@ -202,86 +193,155 @@
             background: #176d13;
             border: 2px solid #ffe44d;
         }
-        /* Estilos del laberinto */
-        #maze-container {
-            width: 100vw;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Estilos específicos para Flappy Touch */
+        #flappy-container {
+            width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center;
             background: url('fonde mesa.jpg') no-repeat center center, linear-gradient(180deg, #e8f5e9 0%, #178a2c 100%);
             background-size: cover;
-            flex-direction: column;
-            /* Quita padding-top */
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
+            position: fixed; top: 0; left: 0;
         }
-        #maze-canvas {
-            background: #fff;
+        #flappy-canvas {
+            background: transparent;
+            display: block;
+            margin: auto;
+            width: 92vw;
+            height: 70vh;
+            max-width: 370px;
+            max-height: 620px;
+            aspect-ratio: 9/16;
             border-radius: 18px;
             box-shadow: 0 0 32px 4px #178a2c88, 0 0 0 4px #178a2c;
-            width: 99vw;
-            height: 75vw;
-            max-width: 520px;
-            max-height: 400px;
-            min-width: 260px;
-            min-height: 180px;
-            aspect-ratio: 16/9;
+            border: none;
             touch-action: none;
-            display: block;
         }
-        #maze-controls {
-            margin-top: 18px;
+        #flappy-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: url('Fondo texto.jpg') no-repeat center center;
+            background-size: cover;
+            color: #178a2c;
             display: flex;
             flex-direction: column;
             align-items: center;
-            z-index: 2;
-            width: auto;
+            justify-content: center;
+            z-index: 10;
+            font-family: 'Montserrat', Arial, sans-serif;
         }
-        #maze-controls div {
-            display: flex;
-            gap: 10px;
+        #flappy-overlay .arbol-img {
+            width: 38vw;
+            max-width: 180px;
+            min-width: 90px;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            filter: drop-shadow(0 4px 16px #fff);
         }
-        #maze-controls button {
-            width: 60px;
-            height: 60px;
-            font-size: 2em;
-            border-radius: 50%;
+        #flappy-overlay h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #178a2c;
+            text-align: center;
+            text-shadow: 0 2px 12px #fff, 0 0 12px #178a2c, 2px 2px 0 #fff;
+            margin-top: 0;
+        }
+        #flappy-overlay .arbol-chan-titulo {
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #178a2c;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 0.7rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            text-shadow: 0 2px 12px #fff, 0 0 12px #178a2c, 2px 2px 0 #fff;
+        }
+        #flappy-overlay .arbol-chan-texto {
+            color: #fff;
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 1.05rem;
+            margin-top: 0.3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            text-shadow: 0 2px 8px #000;
+        }
+        #flappy-overlay button, #flappy-overlay .btn-continuar {
+            font-size: 1.3rem;
             background: #178a2c;
             color: #fff;
             border: 2px solid #fff;
-            font-family: 'Montserrat', Arial, sans-serif;
+            border-radius: 8px;
+            padding: 0.7rem 2.5rem;
             font-weight: bold;
-            box-shadow: 0 2px 8px #178a2c33;
+            font-family: 'Montserrat', Arial, sans-serif;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
             cursor: pointer;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
         }
-        #maze-controls button:active {
-            background: #ffe44d;
-            color: #178a2c;
+        #flappy-overlay button:active, #flappy-overlay .btn-continuar:active {
+            background: #176d13;
             border: 2px solid #ffe44d;
+        }
+        #flappy-countdown {
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 20;
+            pointer-events: none;
+        }
+        #flappy-countdown-num {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 4rem;
+            color: #ffe44d; /* Cambiado de blanco a amarillo */
+            text-shadow: 0 2px 16px #178a2c,0 0 12px #fff;
+        }
+        #ost-text {
+            position:fixed;bottom:18px;left:0;width:100vw;text-align:center;z-index:20;
+            font-family:'Montserrat',Arial,sans-serif;font-size:1.05rem;color:#fff;text-shadow:0 2px 8px #000;
+        }
+        #flappy-top-img-container {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            pointer-events: none;
+            height: 10vh;
+        }
+        #flappy-top-img {
+            width: 16.1vw; /* 14vw * 1.15 */
+            max-width: 50.6px; /* 44px * 1.15 */
+            min-width: 27.6px; /* 24px * 1.15 */
+            margin-top: 0.7vh;
+            margin-bottom: 0.2vh;
+            filter: drop-shadow(0 4px 16px #fff);
+            opacity: 1;
+            transition: opacity 1s;
         }
     </style>
 </head>
 <body>
     <div class="arbol-chan-container" id="arbol-chan-container">
         <div class="arbol-chan-content">
-            <img src="abuelo.sama.png" class="arbol-chan-img" id="arbol-chan-img" alt="Tree-chan" />
-            <div class="arbol-chan-titulo" id="arbol-chan-titulo">Kucho</div>
+
+            <img src="gymbro.png" class="arbol-chan-img" id="arbol-chan-img" alt="Gym Bro" />
+            <div class="arbol-chan-titulo" id="arbol-chan-titulo">Gym Bro</div>
             <div class="arbol-chan-texto" id="arbol-chan-texto">
-                "Bro" here, "Bro" there... How ridiculous it sounds.<br>It's no use lifting big weights or having huge arms if your legs don't know what it means to run.
+                Bro... Do you really think you can get the clue that easily?<br>
+                I've seen iguanas with more muscle mass than you.
             </div>
             <button class="btn-continuar" id="btn-continuar">Continue</button>
         </div>
     </div>
     <script>
-        // Don Árbol entrance animation
+        // Animación de entrada de Don Árbol
         const arbolChanImg = document.getElementById('arbol-chan-img');
         setTimeout(() => {
             arbolChanImg.classList.add('visible');
         }, 800);
 
-        // Remove fade-in for title, text, and button
+        // Elimina los fade-in para título, texto y botón
         /*
         setTimeout(() => {
             document.getElementById('arbol-chan-titulo').classList.add('visible');
@@ -294,451 +354,479 @@
         }, 1500);
         */
 
-        // Add fade-in class on page load for slow effect
+        // Agrega la clase fade-in al cargar la página para el efecto lento
         window.addEventListener('DOMContentLoaded', function() {
             document.body.classList.add('fade-in');
         });
 
-        // Dialogue sequence and ping pong game
+        // Secuencia de diálogo y juego de ping pong
         let arbolChanDialogStep = 0;
         const arbolChanTexto = document.getElementById('arbol-chan-texto');
         const btnContinuar = document.getElementById('btn-continuar');
         btnContinuar.addEventListener('click', function() {
             if (arbolChanDialogStep === 0) {
-                arbolChanTexto.innerHTML = `Son, I'll be quick. If you want the next clue, you'll have to be faster than me.`;
+                arbolChanTexto.innerHTML = "Prove you're a real Bro™. Hold these weights without breaking a sweat for as long as necessary.";
                 arbolChanDialogStep = 1;
             } else {
-                // Replace the ping pong game with the maze, but keep the win/lose screens
+                // Reemplaza el juego Pong por Flappy Touch con estética visual del Pong
                 document.body.innerHTML = `
-    <style>
-        #maze-container {
-            width: 100vw;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: url('fonde mesa.jpg') no-repeat center center, linear-gradient(180deg, #e8f5e9 0%, #178a2c 100%);
-            background-size: cover;
-            flex-direction: column;
-            /* Remove padding-top */
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        #maze-canvas {
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 0 32px 4px #178a2c88, 0 0 0 4px #178a2c;
-            width: 99vw;
-            height: 75vw;
-            max-width: 520px;
-            max-height: 400px;
-            min-width: 260px;
-            min-height: 180px;
-            aspect-ratio: 16/9;
-            touch-action: none;
-            display: block;
-        }
-        #maze-controls {
-            margin-top: 18px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 2;
-            width: auto;
-        }
-        #maze-controls div {
-            display: flex;
-            gap: 10px;
-        }
-        #maze-controls button {
-            width: 60px;
-            height: 60px;
-            font-size: 2em;
-            border-radius: 50%;
-            background: #178a2c;
-            color: #fff;
-            border: 2px solid #fff;
-            font-family: 'Montserrat', Arial, sans-serif;
-            font-weight: bold;
-            box-shadow: 0 2px 8px #178a2c33;
-            cursor: pointer;
-        }
-        #maze-controls button:active {
-            background: #ffe44d;
-            color: #178a2c;
-            border: 2px solid #ffe44d;
-        }
-    </style>
-    <div id="maze-container">
-        <canvas id="maze-canvas"></canvas>
-        <div id="maze-controls">
-            <div>
-                <button id="maze-up">▲</button>
-            </div>
-            <div>
-                <button id="maze-left">◀</button>
-                <button id="maze-down">▼</button>
-                <button id="maze-right">▶</button>
-            </div>
-        </div>
-    </div>
-    <div id="ost-text" style="position:fixed;bottom:18px;left:0;width:100vw;text-align:center;z-index:20;font-family:'Montserrat',Arial,sans-serif;font-size:1.05rem;color:#fff;text-shadow:0 2px 8px #000;">
-        OST: Green Hill Zone - Sonic The Hedgehog
-    </div>
-    <audio id="maze-audio" src="abuelotime.mp3" loop></audio>
-`;
-                setTimeout(() => {
-                    // --- Maze game code with win/lose screens ---
-                    const canvas = document.getElementById('maze-canvas');
-                    const ctx = canvas.getContext('2d');
-                    let W = canvas.width, H = canvas.height;
-                    function getOptimalMazeSize() {
-                        const maxCols = 60, maxRows = 40, minCell = 14;
-                        let cols = Math.floor(W / minCell);
-                        let rows = Math.floor(H / minCell);
-                        cols = Math.min(cols, maxCols);
-                        rows = Math.min(rows, maxRows);
-                        if (cols % 2 === 0) cols--;
-                        if (rows % 2 === 0) rows--;
-                        return {cols, rows};
-                    }
-                    let MAZE_COLS, MAZE_ROWS, CELL, OFFSET_X, OFFSET_Y, maze, player, ai;
-                    function recalcCellAndOffsets() {
-                        const size = getOptimalMazeSize();
-                        MAZE_COLS = size.cols;
-                        MAZE_ROWS = size.rows;
-                        CELL = Math.min(W / MAZE_COLS, H / MAZE_ROWS);
-                        OFFSET_X = (W - (CELL * MAZE_COLS)) / 2;
-                        OFFSET_Y = (H - (CELL * MAZE_ROWS)) / 2;
-                    }
-                    function generateMaze(cols, rows) {
-                        const maze = Array.from({length: rows}, () => Array(cols).fill(0));
-                        function carve(x, y) {
-                            maze[y][x] = 1;
-                            const dirs = [[1,0],[-1,0],[0,1],[0,-1]].sort(()=>Math.random()-0.5);
-                            for (const [dx,dy] of dirs) {
-                                const nx = x + dx*2, ny = y + dy*2;
-                                if (nx >= 0 && nx < cols && ny >= 0 && ny < rows && maze[ny][nx] === 0) {
-                                    maze[y+dy][x+dx] = 1;
-                                    carve(nx, ny);
-                                }
-                            }
+                    <style>
+                        body {
+                            margin: 0;
+                            background: #e8f5e9;
+                            width: 100vw;
+                            min-height: 100vh;
+                            font-family: 'Montserrat', Arial, sans-serif;
                         }
-                        carve(0, Math.floor(rows/2));
-                        maze[Math.floor(rows/2)][0] = 1;
-                        maze[Math.floor(rows/2)][cols-1] = 1;
-                        return maze;
-                    }
-                    function getPlayerSize() {
-                        return CELL * 0.7;
-                    }
-                    function getPlayerOffset() {
-                        return (CELL - getPlayerSize()) / 2;
-                    }
-                    function resetMazeAndPlayers() {
-                        recalcCellAndOffsets();
-                        maze = generateMaze(MAZE_COLS, MAZE_ROWS);
-                        player = {
-                            x: 0,
-                            y: Math.floor(MAZE_ROWS/2),
-                            color: '#ffe44d',
-                            path: [],
-                            step: 0,
-                        };
-                        ai = {
-                            x: 0,
-                            y: Math.floor(MAZE_ROWS/2),
-                            color: '#e53935', // rojo
-                            path: [],
-                            step: 0,
-                        };
-                        player.path = findPath(player.x, player.y, MAZE_COLS-1, player.y, maze);
-                        ai.path = findPath(ai.x, ai.y, MAZE_COLS-1, ai.y, maze, 0.2);
-                    }
+                        #flappy-container {
+                            width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center;
+                            background: url('fonde mesa.jpg') no-repeat center center, linear-gradient(180deg, #e8f5e9 0%, #178a2c 100%);
+                            background-size: cover;
+                            position: fixed; top: 0; left: 0;
+                        }
+                        #flappy-canvas {
+                            background: transparent;
+                            display: block;
+                            margin: auto;
+                            width: 92vw;
+                            height: 70vh;
+                            max-width: 370px;
+                            max-height: 620px;
+                            aspect-ratio: 9/16;
+                            border-radius: 18px;
+                            box-shadow: 0 0 32px 4px #178a2c88, 0 0 0 4px #178a2c;
+                            border: none;
+                            touch-action: none;
+                        }
+                        #flappy-overlay {
+                            position: absolute;
+                            top: 0; left: 0; width: 100vw; height: 100vh;
+                            background: url('Fondo texto.jpg') no-repeat center center;
+                            background-size: cover;
+                            color: #178a2c;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            z-index: 10;
+                            font-family: 'Montserrat', Arial, sans-serif;
+                        }
+                        #flappy-overlay .arbol-img {
+                            width: 38vw;
+                            max-width: 180px;
+                            min-width: 90px;
+                            margin-top: 2.5rem;
+                            margin-bottom: 1.2rem;
+                            filter: drop-shadow(0 4px 16px #fff);
+                        }
+                        #flappy-overlay h2 {
+                            font-size: 2.2rem;
+                            margin-bottom: 2rem;
+                            color: #178a2c;
+                            text-align: center;
+                            text-shadow: 0 2px 12px #fff, 0 0 12px #178a2c, 2px 2px 0 #fff;
+                            margin-top: 0;
+                        }
+                        #flappy-overlay .arbol-chan-titulo {
+                            font-family: 'Montserrat', Arial, sans-serif;
+                            color: #178a2c;
+                            font-size: 2rem;
+                            font-weight: bold;
+                            margin-top: 0.7rem;
+                            margin-bottom: 0.5rem;
+                            text-align: center;
+                            text-shadow: 0 2px 12px #fff, 0 0 12px #178a2c, 2px 2px 0 #fff;
+                        }
+                        #flappy-overlay .arbol-chan-texto {
+                            color: #fff;
+                            font-family: 'Roboto', Arial, sans-serif;
+                            font-size: 1.05rem;
+                            margin-top: 0.3rem;
+                            margin-bottom: 1rem;
+                            text-align: center;
+                            text-shadow: 0 2px 8px #000;
+                        }
+                        #flappy-overlay button, #flappy-overlay .btn-continuar {
+                            font-size: 1.3rem;
+                            background: #178a2c;
+                            color: #fff;
+                            border: 2px solid #fff;
+                            border-radius: 8px;
+                            padding: 0.7rem 2.5rem;
+                            font-weight: bold;
+                            font-family: 'Montserrat', Arial, sans-serif;
+                            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+                            cursor: pointer;
+                            margin-top: 1.5rem;
+                            margin-bottom: 2rem;
+                        }
+                        #flappy-overlay button:active, #flappy-overlay .btn-continuar:active {
+                            background: #176d13;
+                            border: 2px solid #ffe44d;
+                        }
+                        #flappy-countdown {
+                            position: absolute;
+                            top: 0; left: 0; width: 100vw; height: 100vh;
+                            display: flex; align-items: center; justify-content: center;
+                            z-index: 20;
+                            pointer-events: none;
+                        }
+                        #flappy-countdown-num {
+                            font-family: 'Montserrat', Arial, sans-serif;
+                            font-size: 4rem;
+                            color: #ffe44d; /* Cambiado de blanco a amarillo */
+                            text-shadow: 0 2px 16px #178a2c,0 0 12px #fff;
+                        }
+                        #ost-text {
+                            position:fixed;bottom:18px;left:0;width:100vw;text-align:center;z-index:20;
+                            font-family:'Montserrat',Arial,sans-serif;font-size:1.05rem;color:#fff;text-shadow:0 2px 8px #000;
+                        }
+                        #flappy-top-img-container {
+                            width: 100vw;
+                            display: flex;
+                            justify-content: center;
+                            align-items: flex-end;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            z-index: 2;
+                            pointer-events: none;
+                            height: 10vh;
+                        }
+                        #flappy-top-img {
+                            width: 30vw; /* 14vw * 1.15 */
+                            max-width: 70px; /* 44px * 1.15 */
+                            min-width: 40px; /* 24px * 1.15 */
+                            margin-top: 0.7vh;
+                            margin-bottom: 0.2vh;
+                            filter: drop-shadow(0 4px 16px #fff);
+                            opacity: 1;
+                            transition: opacity 1s;
+                        }
+                    </style>
+                    <div id="flappy-top-img-container">
+                        <img src="gcon.png" id="flappy-top-img" alt="Gym Bro" />
+                    </div>
+                    <div id="flappy-container">
+                        <canvas id="flappy-canvas"></canvas>
+                        <div id="flappy-countdown">
+                            <span id="flappy-countdown-num">3</span>
+                        </div>
+                    </div>
+                    <div id="ost-text">
+                        Dr. Wily's Stage Theme 1 metal version - Megaman 2
+                    </div>
+                    <audio id="pong-audio" src="gymtime.mp3" loop></audio>
+                    <div id="flappy-overlay" style="display:none;"></div>
+                `;
+
+                // Flappy Touch game logic
+                setTimeout(() => {
+                    const canvas = document.getElementById('flappy-canvas');
+                    const ctx = canvas.getContext('2d');
+                    const overlay = document.getElementById('flappy-overlay');
+                    const countdownDiv = document.getElementById('flappy-countdown');
+                    const countdownNum = document.getElementById('flappy-countdown-num');
+                    const audio = document.getElementById('pong-audio');
+
+                    // Responsive canvas
                     function resizeCanvas() {
                         const rect = canvas.getBoundingClientRect();
                         canvas.width = rect.width;
                         canvas.height = rect.height;
-                        W = canvas.width; H = canvas.height;
-                        resetMazeAndPlayers();
                     }
                     resizeCanvas();
-                    window.addEventListener('resize', () => {
-                        resizeCanvas();
-                        draw();
-                    });
-                    function heuristic(ax, ay, bx, by) {
-                        return Math.abs(ax-bx) + Math.abs(ay-by);
+                    window.addEventListener('resize', resizeCanvas);
+
+                    // Game variables
+                    let birdY, velocity, gameStarted, countdown, lastPhaseTime, animationStartTime, repetitions;
+                    let currentTargetIndex, currentOffset, time, gameTimer, gameTimerInterval;
+                    let inFinalMilliseconds, finalMilliseconds, activeBonuses, gameOver;
+                    const gravity = 0.25;
+                    function getGameSize() { return { w: canvas.width, h: canvas.height }; }
+                    function rel(val, axis) {
+                        const { w, h } = getGameSize();
+                        return axis === 'w' ? val * w : val * h;
                     }
-                    function findPath(sx, sy, ex, ey, maze, randomness=0) {
-                        const cols = maze[0].length, rows = maze.length;
-                        const open = [[sx, sy, 0, heuristic(sx,sy,ex,ey), null]];
-                        const visited = Array.from({length: rows}, () => Array(cols).fill(false));
-                        while (open.length) {
-                            open.sort((a,b)=>a[2]+a[3]-b[2]-b[3]);
-                            const [x, y, g, h, prev] = open.shift();
-                            if (x === ex && y === ey) {
-                                const path = [[x,y]];
-                                let p = prev;
-                                while (p) { path.push([p[0],p[1]]); p = p[4]; }
-                                return path.reverse();
-                            }
-                            if (visited[y][x]) continue;
-                            visited[y][x] = true;
-                            for (const [dx,dy] of [[1,0],[0,1],[0,-1],[-1,0]]) {
-                                const nx = x+dx, ny = y+dy;
-                                if (nx>=0 && nx<cols && ny>=0 && ny<rows && maze[ny][nx]===1 && !visited[ny][nx]) {
-                                    open.push([nx,ny,g+1,heuristic(nx,ny,ex,ey), [x,y,g,h,prev]]);
-                                }
-                            }
-                        }
-                        return null;
+                    const birdX = () => getGameSize().w / 2;
+                    const phaseOffsets = [rel(0.13, 'h'), rel(0.19, 'h'), rel(0.25, 'h'), rel(0.31, 'h')];
+                    const maxRepetitions = 5;
+                    let phaseAnimationActive = true;
+                    let topLineY = 0;
+                    let bottomLineY = 0;
+
+                    function resetGame() {
+                        birdY = getGameSize().h / 2;
+                        velocity = 0;
+                        gameStarted = false;
+                        countdown = 3;
+                        lastPhaseTime = 0;
+                        animationStartTime = null;
+                        repetitions = 0;
+                        currentTargetIndex = 0;
+                        currentOffset = phaseOffsets[0];
+                        time = 0;
+                        gameTimer = 30;
+                        inFinalMilliseconds = false;
+                        finalMilliseconds = 900;
+                        activeBonuses = [];
+                        gameOver = false;
+                        phaseAnimationActive = true;
+                        overlay.style.display = 'none';
+                        clearInterval(gameTimerInterval);
+                        startCountdown();
+                        update();
                     }
-                    function draw() {
-                        ctx.clearRect(0,0,W,H);
-                        ctx.fillStyle = "#fff";
-                        ctx.fillRect(0, 0, W, H);
-                        for (let y=0; y<MAZE_ROWS; y++) {
-                            for (let x=0; x<MAZE_COLS; x++) {
-                                if (maze[y][x] === 0) {
-                                    ctx.fillStyle = '#178a2c';
-                                    ctx.fillRect(
-                                        Math.round(OFFSET_X + x*CELL),
-                                        Math.round(OFFSET_Y + y*CELL),
-                                        Math.ceil(CELL),
-                                        Math.ceil(CELL)
-                                    );
-                                }
-                            }
+
+                    function updateTargetOffset() {
+                        const phaseDuration = 300;
+                        const nextTargetIndex = Math.min(Math.floor(time / phaseDuration), phaseOffsets.length - 1);
+                        if (nextTargetIndex !== currentTargetIndex) {
+                            currentTargetIndex = nextTargetIndex;
+                            lastPhaseTime = performance.now();
                         }
-                        // META: círculo azul MUY llamativo con nueva animación (pulsante y giro de halo)
-                        const goalX = MAZE_COLS - 1, goalY = Math.floor(MAZE_ROWS / 2);
-                        const cx = OFFSET_X + goalX * CELL + CELL / 2;
-                        const cy = OFFSET_Y + goalY * CELL + CELL / 2;
-                        const goalRadius = CELL * 0.38;
-                        const t = Date.now();
-                        const glow = 0.5 + 0.5 * Math.sin(t / 220);
+                    }
 
-                        // Halo exterior giratorio y pulsante
-                        ctx.save();
-                        ctx.globalAlpha = 0.38 + 0.22 * glow;
-                        ctx.translate(cx, cy);
-                        ctx.rotate((t / 900) % (2 * Math.PI));
-                        ctx.shadowColor = "#00e0ff";
-                        ctx.shadowBlur = 48 + 24 * glow;
-                        ctx.beginPath();
-                        ctx.ellipse(0, 0, goalRadius * (1.8 + 0.12 * Math.sin(t / 180)), goalRadius * (1.2 + 0.08 * Math.cos(t / 140)), 0, 0, 2 * Math.PI);
-                        ctx.closePath();
-                        ctx.fillStyle = "#00e0ff";
-                        ctx.fill();
-                        ctx.restore();
+                    function smoothOffset() {
+                        const target = phaseOffsets[currentTargetIndex];
+                        const progress = Math.min(time / 200, 1);
+                        const factor = 0.01 + progress * (0.05 - 0.01);
+                        currentOffset += (target - currentOffset) * factor;
+                        return currentOffset;
+                    }
 
-                        // Círculo exterior azul claro con sombra y pulso
-                        ctx.save();
-                        ctx.globalAlpha = 0.92;
-                        ctx.shadowColor = "#00e0ff";
-                        ctx.shadowBlur = 28 + 18 * glow;
-                        ctx.beginPath();
-                        ctx.arc(cx, cy, goalRadius * (1.08 + 0.06 * Math.sin(t / 180)), 0, 2 * Math.PI);
-                        ctx.closePath();
-                        ctx.fillStyle = "#b3e5fc";
-                        ctx.fill();
-                        ctx.restore();
-
-                        // Círculo interior azul intenso con degradado y pulso
+                    function drawBird() {
+                        // Usa la imagen "pesas1.png" en vez de dibujar las pesas con canvas
+                        const img = drawBird.pesasImg || (drawBird.pesasImg = new Image());
+                        if (!img.src) img.src = "pesas1.png";
+                        // Haz las pesas aún más grandes
+                        const w = rel(0.48, 'w'); // antes 0.38
+                        const h = rel(0.24, 'h'); // antes 0.19
                         ctx.save();
                         ctx.globalAlpha = 1;
-                        ctx.beginPath();
-                        ctx.arc(cx, cy, goalRadius * (1 + 0.04 * Math.cos(t / 150)), 0, 2 * Math.PI);
-                        ctx.closePath();
-                        const grad = ctx.createRadialGradient(cx, cy, goalRadius * 0.2, cx, cy, goalRadius);
-                        grad.addColorStop(0, "#e3f2fd");
-                        grad.addColorStop(0.5, "#2196f3");
-                        grad.addColorStop(1, "#1565c0");
-                        ctx.fillStyle = grad;
-                        ctx.fill();
+                        ctx.drawImage(img, birdX() - w / 2, birdY - h / 2, w, h);
                         ctx.restore();
-
-                        // Efecto de destello animado (más suave)
-                        ctx.save();
-                        ctx.globalAlpha = 0.22 + 0.22 * glow;
-                        ctx.beginPath();
-                        ctx.arc(cx, cy, goalRadius * (1.18 + 0.06 * Math.sin(t / 120)), 0, 2 * Math.PI);
-                        ctx.closePath();
-                        ctx.fillStyle = "#fff";
-                        ctx.fill();
-                        ctx.restore();
-
-                        // Efecto de brillo tipo "estrella" girando
-                        ctx.save();
-                        ctx.globalAlpha = 0.5 + 0.3 * glow;
-                        ctx.strokeStyle = "#fff";
-                        ctx.lineWidth = 2.2;
-                        ctx.translate(cx, cy);
-                        ctx.rotate((t / 1400) % (2 * Math.PI));
-                        for (let i = 0; i < 8; i++) {
-                            ctx.save();
-                            ctx.rotate((Math.PI / 4) * i);
-                            ctx.beginPath();
-                            ctx.moveTo(goalRadius * 0.3, 0);
-                            ctx.lineTo(goalRadius * (1.05 + 0.08 * Math.sin(t / 300 + i)), 0);
-                            ctx.stroke();
-                            ctx.restore();
-                        }
-                        ctx.restore();
-
-    ctx.fillStyle = ai.color;
-    ctx.fillRect(
-        OFFSET_X + ai.x*CELL + getPlayerOffset(),
-        OFFSET_Y + ai.y*CELL + getPlayerOffset(),
-        getPlayerSize(), getPlayerSize()
-    );
-    ctx.fillStyle = player.color;
-    ctx.fillRect(
-        OFFSET_X + player.x*CELL + getPlayerOffset(),
-        OFFSET_Y + player.y*CELL + getPlayerOffset(),
-        getPlayerSize(), getPlayerSize()
-    );
-}
-                    function aiAdvance() {
-                        if (ai.step < ai.path.length-1) {
-                            ai.step++;
-                            ai.x = ai.path[ai.step][0];
-                            ai.y = ai.path[ai.step][1];
-                        }
                     }
-                    let finished = false;
-                    function showEndScreen(playerWon) {
-                        finished = true;
-                        // Stop music on finish
-                        const mazeAudio = document.getElementById('maze-audio');
-                        if (mazeAudio) {
-                            mazeAudio.pause();
-                            mazeAudio.currentTime = 0;
+
+                    function drawBoundaries() {
+                        const now = performance.now();
+                        const baseOffset = smoothOffset();
+                        let offsetAnim = 0;
+                        if (currentTargetIndex === phaseOffsets.length - 1) {
+                            if (phaseAnimationActive) {
+                                const elapsed = (now - lastPhaseTime) / 1000;
+                                offsetAnim = Math.sin(elapsed * 2 * Math.PI / 10) * rel(0.16, 'h');
+                                if (elapsed >= 10) {
+                                    animationStartTime = now;
+                                    phaseAnimationActive = false;
+                                }
+                            } else if (repetitions < maxRepetitions) {
+                                const elapsed = (now - animationStartTime) / 1000;
+                                const cycleDuration = 10;
+                                const t = (elapsed % cycleDuration) / cycleDuration;
+                                if (elapsed >= (repetitions + 1) * cycleDuration) repetitions++;
+                                offsetAnim = Math.sin(t * 2 * Math.PI) * rel(0.16, 'h');
+                            }
                         }
-                        const mazeContainer = document.getElementById('maze-container');
-                        let html = '';
-                        if (playerWon) {
-                            html = `
-        <div class="arbol-chan-container" id="maze-end" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10;background:url('Fondo texto.jpg') no-repeat center center;background-size:cover;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-            <div class="arbol-chan-content" style="background:none;box-shadow:none;">
-                <img src="abuelo.sama.png" class="arbol-chan-img" alt="Don Árbol" style="opacity:1;transform:none;margin-bottom:0.7rem;" />
-                <div class="arbol-chan-titulo" style="color:#178a2c;margin-bottom:0.7rem;">Kucho</div>
-                <div class="arbol-chan-texto" style="color:#fff;">
-                    Not bad, son.
-                </div>
-                <button id="maze-show-clue" class="btn-continuar" style="margin-top:1.2rem;">See clue</button>
-            </div>
-        </div>
-                            `;
-        mazeContainer.insertAdjacentHTML('beforeend', html);
-        document.getElementById('maze-show-clue').onclick = function() {
-    // Use the same space for image as the example (pong-next-img)
-    document.getElementById('maze-end').innerHTML = `
-        <div class="arbol-chan-titulo" style="color:#178a2c;margin-bottom:0.7rem;font-size:2.2rem;text-shadow:0 2px 12px #fff,0 0 12px #178a2c,2px 2px 0 #fff;">
-            Next clue
-        </div>
-        <div id="maze-next-img" style="width:60vw;max-width:300px;min-width:120px;height:180px;background:#fff;margin:0;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px #178a2c33;">
-            <img src="iguana.jpeg" alt="Clue" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:12px 12px 12px 12px;">
-        </div>
-        <button id="maze-continue" style="font-size:1.3rem;background:#178a2c;color:#fff;border:2px solid #fff;border-radius:8px;padding:0.7rem 2.5rem;font-weight:bold;font-family:'Montserrat',Arial,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;margin-top:1.5rem;margin-bottom:2rem;">Continue</button>
-    `;
-    document.getElementById('maze-continue').onclick = function() {
-        window.location.href = "https://danjua77.github.io/Sagrado.Puzzle/";
-    };
-};
-                        } else {
-                            html = `
-            <div id="pong-end">
-                <img src="abuelo.sama.png" class="arbol-img" alt="Don Árbol" />
-                <h2>Too slow....</h2>
-                <button id="pong-retry">Continue</button>
-            </div>
-        `;
-        mazeContainer.insertAdjacentHTML('beforeend', html);
-        document.getElementById('pong-retry').onclick = function() {
-            location.reload();
-        };
-    }
-}
-                    function checkWin() {
-                        if (finished) return;
-                        if (player.x === MAZE_COLS-1 && player.y === player.path[0][1]) {
-                            showEndScreen(true);
-                        } else if (ai.x === MAZE_COLS-1 && ai.y === ai.path[0][1]) {
+                        topLineY = baseOffset + offsetAnim;
+                        bottomLineY = getGameSize().h - baseOffset + offsetAnim;
+
+                        // Relleno blanco opaco para TODO el rectángulo verde (canvas)
+                        ctx.save();
+                        ctx.fillStyle = "#fff";
+                        ctx.globalAlpha = 1;
+                        ctx.fillRect(0, 0, getGameSize().w, getGameSize().h);
+                        ctx.restore();
+
+                        // Líneas rojo neón
+                        ctx.save();
+                        ctx.strokeStyle = '#ff1744'; // rojo neón
+                        ctx.lineWidth = rel(0.012, 'w');
+                        ctx.shadowColor = "#ff1744"; // neón
+                        ctx.shadowBlur = 16;
+                        ctx.beginPath();
+                        ctx.moveTo(rel(0.03, 'w'), topLineY);
+                        ctx.lineTo(getGameSize().w - rel(0.03, 'w'), topLineY);
+                        ctx.stroke();
+                        ctx.beginPath();
+                        ctx.moveTo(rel(0.03, 'w'), bottomLineY);
+                        ctx.lineTo(getGameSize().w - rel(0.03, 'w'), bottomLineY);
+                        ctx.stroke();
+                        ctx.shadowBlur = 0;
+                        ctx.restore();
+                    }
+
+                    function checkCollision() {
+                        const halfHeight = rel(0.035, 'w');
+                        if (birdY - halfHeight < topLineY || birdY + halfHeight > bottomLineY) {
                             showEndScreen(false);
                         }
                     }
-                    function movePlayer(dx, dy) {
-                        if (finished) return;
-                        const nx = player.x + dx;
-                        const ny = player.y + dy;
-                        if (
-                            nx >= 0 && nx < MAZE_COLS &&
-                            ny >= 0 && ny < MAZE_ROWS &&
-                            maze[ny][nx] === 1
-                        ) {
-                            player.x = nx;
-                            player.y = ny;
-                            checkWin();
-                        }
+
+                    function drawCountdown() {
+                        ctx.fillStyle = '#ffe44d'; // amarillo
+                        ctx.font = `bold ${rel(0.13, 'w')}px 'Montserrat', Arial, sans-serif`;
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.shadowColor = "#178a2c";
+                        ctx.shadowBlur = 8;
+                        ctx.fillText(countdown, getGameSize().w / 2, getGameSize().h / 2);
+                        ctx.shadowBlur = 0;
                     }
-                    // Movimiento SOLO por pulsación (no continuo) para los controles del laberinto
-                    function addSinglePressButton(id, dx, dy) {
-                        const btn = document.getElementById(id);
-                        btn.addEventListener('mousedown', () => {
-                            if (finished) return;
-                            movePlayer(dx, dy);
+
+                    function drawGameTimer() {
+                        if (!gameStarted) return;
+                        ctx.textAlign = 'center';
+                        const timerText = inFinalMilliseconds ? (finalMilliseconds / 1000).toFixed(1) + 's' : gameTimer + 's';
+                        ctx.fillStyle = '#178a2c'; // verde igual al de los títulos
+                        ctx.font = `bold ${rel(0.07, 'w')}px 'Montserrat', Arial, sans-serif`;
+                        ctx.shadowColor = "#178a2c";
+                        ctx.shadowBlur = 8;
+                        ctx.fillText(timerText, getGameSize().w / 2, rel(0.07, 'h'));
+                        ctx.shadowBlur = 0;
+                        activeBonuses = activeBonuses.filter(b => performance.now() - b.start < 1500);
+                        activeBonuses.forEach((b, index) => {
+                            const alpha = 1 - (performance.now() - b.start) / 1500;
+                            ctx.globalAlpha = alpha;
+                            ctx.fillStyle = '#e53935'; // "+5" en rojo
+                            ctx.font = `bold ${rel(0.045, 'w')}px 'Montserrat', Arial, sans-serif`;
+                            const offsetX = rel(0.13, 'w') + index * rel(0.13, 'w') + 3;
+                            ctx.fillText('+5', getGameSize().w / 2 + offsetX, rel(0.07, 'h'));
+                            ctx.globalAlpha = 1;
                         });
-                        btn.addEventListener('touchstart', (e) => {
-                            if (finished) return;
-                            movePlayer(dx, dy);
-                            e.preventDefault();
-                        }, {passive: false});
                     }
-                    addSinglePressButton('maze-up', 0, -1);
-                    addSinglePressButton('maze-down', 0, 1);
-                    addSinglePressButton('maze-left', -1, 0);
-                    addSinglePressButton('maze-right', 1, 0);
 
-                    document.addEventListener('keydown', function(e) {
-                        if (e.key === 'ArrowUp') movePlayer(0, -1);
-                        if (e.key === 'ArrowDown') movePlayer(0, 1);
-                        if (e.key === 'ArrowLeft') movePlayer(-1, 0);
-                        if (e.key === 'ArrowRight') movePlayer(1, 0);
-                    });
-
-                    // IA más rápida pero aún competitiva
-                    let aiTick = 0;
-                    setInterval(() => {
-                        if (!finished) {
-                            aiTick++;
-                            // La IA avanza cada tick (~cada 175ms)
-                            aiAdvance();
-                            checkWin();
+                    function update() {
+                        if (gameOver) return;
+                        ctx.clearRect(0, 0, getGameSize().w, getGameSize().h);
+                        if (!gameStarted) {
+                            updateTargetOffset();
+                            drawBoundaries();
+                            drawBird();
+                            drawCountdown();
+                            time++;
+                            requestAnimationFrame(update);
+                            return;
                         }
-                    }, 215); // antes 115, luego 190ms, ahora 209ms para más lentitud
+                        velocity += gravity * rel(1, 'h') / 480;
+                        birdY += velocity;
+                        if (birdY > getGameSize().h) birdY = getGameSize().h;
+                        if (birdY < 0) {
+                            birdY = 0;
+                            velocity = 0;
+                        }
+                        updateTargetOffset();
+                        drawBoundaries();
+                        drawBird();
+                        drawGameTimer();
+                        checkCollision();
+                        time++;
+                        requestAnimationFrame(update);
+                    }
 
-                    requestAnimationFrame(function loop() {
-                        if (!finished) draw();
-                        requestAnimationFrame(loop);
-                    });
+                    function flap() {
+                        if (!gameStarted || gameOver) return;
+                        velocity = -5.4 * rel(1, 'h') / 480;
+                    }
 
-                    // Música
-                    const audio = document.getElementById('maze-audio');
-                    if (audio) {
-                        audio.currentTime = 0;
-                        audio.play().catch(()=>{});
-                        audio.addEventListener('ended', function() {
+                    function startGameTimer() {
+                        let bonusGiven = 0;
+                        gameTimerInterval = setInterval(() => {
+                            if (inFinalMilliseconds) {
+                                finalMilliseconds -= 100;
+                                if (finalMilliseconds <= 0) {
+                                    clearInterval(gameTimerInterval);
+                                    showEndScreen(true);
+                                }
+                                return;
+                            }
+                            gameTimer--;
+                            if (gameTimer === 5 && bonusGiven < 3) {
+                                gameTimer += 5;
+                                bonusGiven++;
+                                activeBonuses.push({ start: performance.now() });
+                            }
+                            if (gameTimer === 1 && bonusGiven >= 3) inFinalMilliseconds = true;
+                            if (gameTimer <= 0) {
+                                clearInterval(gameTimerInterval);
+                                showEndScreen(true);
+                            }
+                        }, 1000);
+                    }
+
+                    function showEndScreen(playerWon) {
+                        gameOver = true;
+                        overlay.style.display = 'flex';
+                        if (audio) {
+                            audio.pause();
+                            audio.currentTime = 0;
+                        }
+                        if (playerWon) {
+                            // Reproducir ok.mp3 al ganar (apenas gana)
+                            const okAudio = new Audio('ok.mp3');
+                            okAudio.play().catch(()=>{});
+                            overlay.innerHTML = `
+                                <div class="arbol-chan-content" style="background:none;box-shadow:none;">
+                                    <img src="gymbro.png" class="arbol-chan-img" alt="Gym Bro" style="opacity:1;transform:none;margin-bottom:0.7rem;" />
+                                    <div class="arbol-chan-titulo" style="color:#178a2c;margin-bottom:0.7rem;">Gym Bro</div>
+                                    <div class="arbol-chan-texto" style="color:#fff;">
+                                        Bro... my respects. You did all that without a single gram of pre-workout.<br>
+                                        You are, without a doubt, a real Bro™.
+                                    </div>
+                                    <button id="flappy-show-clue" class="btn-continuar" style="margin-top:1.2rem;">See clue</button>
+                                </div>
+                            `;
+                            document.getElementById('flappy-show-clue').onclick = function() {
+                                overlay.innerHTML = `
+                                    <h2 style="margin-top:0;">Next clue</h2>
+                                    <div id="pong-next-img" style="margin:0; padding:0;">
+                                        <img src="silla1.jpeg" alt="Clue" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:12px 12px 12px 12px;">
+                                    </div>
+                                    <button id="flappy-continue" style="font-size:1.3rem;background:#178a2c;color:#fff;border:2px solid #fff;border-radius:8px;padding:0.7rem 2.5rem;font-weight:bold;font-family:'Montserrat',Arial,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;margin-top:1.5rem;margin-bottom:2rem;">Continue</button>
+                                `;
+                                document.getElementById('flappy-continue').onclick = function() {
+                                    window.location.href = "https://danjua77.github.io/Sagrado.Puzzle/";
+                                };
+                            };
+                        } else {
+                            clearInterval(gameTimerInterval); // Detener el contador al perder
+                            overlay.innerHTML = `
+                                <img src="parrishgym.png" class="arbol-img" alt="Gym Bro" />
+                                <h2>Bro....</h2>
+                                <button id="flappy-retry">Continue</button>
+                            `;
+                            document.getElementById('flappy-retry').onclick = function() {
+                                resetGame();
+                            };
+                        }
+                    }
+
+                    function startCountdown() {
+                        countdownNum.textContent = countdown > 0 ? countdown : "";
+                        countdownDiv.style.display = 'flex';
+                        if (audio) {
                             audio.currentTime = 0;
                             audio.play().catch(()=>{});
-                        });
+                        }
+                        const countdownInterval = setInterval(() => {
+                            countdown--;
+                            countdownNum.textContent = countdown > 0 ? countdown : "";
+                            if (countdown === 0) {
+                                clearInterval(countdownInterval);
+                                countdownDiv.style.display = 'none';
+                                gameStarted = true;
+                                startGameTimer();
+                            }
+                        }, 1000);
                     }
+
+                    document.body.addEventListener('touchstart', flap);
+                    document.body.addEventListener('mousedown', flap);
+
+                    resetGame();
                 }, 10);
             }
         });
     </script>
 </body>
-</html>
 </html>
